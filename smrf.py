@@ -22,7 +22,7 @@ from score import calc_pair_score
 from util import message
 from util import write_file
 
-VERSION = 0.2.1-beta.1
+VERSION = '0.2.1-beta.1'
 CONFIG_FILE = '%s/smrf.cfg'%os.path.dirname(__file__)
 DEFAULT_CONFIG = """\
 [external]
@@ -78,9 +78,9 @@ Output:
 """%sys.argv[0]
 
 if __name__ == '__main__':
+    cfg = load_config()
     if len(sys.argv[1:]) != 4:
         print_help()
         sys.exit(1)
     afa_file, pdb_file, out_file1, out_file2 = sys.argv[1:]
-    cfg = load_config()
     smrf(afa_file, pdb_file, out_file1, out_file2, cfg['pmrf_path'])
