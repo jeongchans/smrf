@@ -22,7 +22,7 @@ from score import calc_pair_score
 from util import message
 from util import write_file
 
-VERSION = '0.2.1-beta.1'
+VERSION = '0.2.1'
 CONFIG_FILE = '%s/smrf.cfg'%os.path.dirname(__file__)
 DEFAULT_CONFIG = """\
 [external]
