@@ -7,59 +7,66 @@ This is an evolutionary analysis tool using structure-based Markov random field.
 ### Prerequisites
 The standard Python package and the following packages are required.
 
-- [Biopython] (http://biopython.org/)
-- [Numpy] (http://www.numpy.org/)
+- [Biopython]
+- [Numpy]
 
 The PMRF software is required.
 
-- [PMRF] (https://github.com/jeongchans/pmrf)
+- [PMRF] (Compatible with v0.2)
 
 ### Download
-Download the the latest release from [the git repository] (https://github.com/jeongchans/smrf/releases).
+Download the the latest release from the [SMRF repository].
 
 ### Installation
 This tool is not packaged for the general installation, yet. Instead, uncompress the downloaded file to the directory where the SMRF software will be installed.
 
-### Configuring the initial setting
+### Configuring the Initial Setting
 Create and configure smrf.cfg with the directory where the PMRF software is installed.
 
 ```sh
 $ smrf.py   # This command creates smrf.cfg, if it does not exist in the directory where SMRF is installed
+$ vi [SMRF_DIR]/smrf.cfg
 ```
 
 
 ## Usage
 
-1. Create configuration file
+### Getting Started
+Calculate the positional coevolution scores by using example.afa (MSA file formatted as FASTA) and example.pdb (PDB file).
 
 ```sh
-$ smrf.py
+$ smrf.py example.afa example.pdb
 ```
 
-2. Configure smrf.cfg with the directory where the PMRF software is installed.
+Show the help page.
 
-3. Run smrf.py as follows
-
-```text
-Usage: smrf.py [msa_file] [pdb_file] [out_file1] [out_file2]
-
-Input:
-  msa_file      Multiple sequence alignment (FASTA format)
-  pdb_file      Protein structure (PDB format)
-
-Output:
-  out_file1     Positional coevolution score
-                Column #1: residue position
-                Column #2: score
-  out_file2     Pairwise coevolution score
-                Column #1: residue position #1
-                Column #2: residue position #2
-                Column #3: score
+```sh
+$ smrf.py -h
 ```
 
+### Writing coevolution scores
+Write the positional and pairwise coevolution scores with `--pos` and `--pair` options, respectively.
+
+```sh
+$ smrf.py example.afa example.pdb --pos pos_score.txt --pair pair_score.txt
+```
+
+### Writing MRF model
+Write the MRF model with `--mrf` option.
+
+```sh
+$ smrf.py example.afa example.pdb --mrf model.mrf
+```
+
+The MRF model is compatible with [PMRF] software.
 
 ## Reference
 If you use this software for any published work, please cite the accompanying paper.
 
-- Chan-Seok Jeong and Donsup Kim (2016) Structure-based Markov random field model for representing evolutionary constraints on functional sites. BMC Bioinformatics. Submitted.
+- Chan-Seok Jeong and Dongsup Kim (2016) Structure-based Markov random field model for representing evolutionary constraints on functional sites. BMC Bioinformatics. 17, 99.
 
+
+[SMRF repository]: https://github.com/jeongchans/smrf/releases
+[PMRF]: https://github.com/jeongchans/pmrf
+[Biopython]: http://biopython.org/
+[Numpy]: http://www.numpy.org/
