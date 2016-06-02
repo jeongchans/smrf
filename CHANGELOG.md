@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 
-## Unreleased
+## 0.2.2 - 2016-06-02
 
 ### Added
 - Specify the edge file for MRF architecture. Use `--edge` option.
