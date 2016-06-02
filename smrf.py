@@ -7,7 +7,7 @@
 #
 # If you use this software for any published work, please cite the accompanying paper.
 #
-#   Chan-Seok Jeong, and Donsup Kim (2016) Structure-based Markov random field model for representing evolutionary constraints on functional sites. BMC Bioinformatics. Accepted.
+#   Chan-Seok Jeong, and Dongsup Kim (2016) Structure-based Markov random field model for representing evolutionary constraints on functional sites. BMC Bioinformatics. 17, 99.
 #
 
 import sys
