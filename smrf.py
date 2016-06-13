@@ -22,7 +22,7 @@ from edge import build_edge
 from util import message
 from util import write_file
 
-VERSION = '0.2.2'
+VERSION = '0.4.0'
 CONFIG_FILE = '%s/smrf.cfg'%os.path.dirname(__file__)
 DEFAULT_CONFIG = """\
 [external]

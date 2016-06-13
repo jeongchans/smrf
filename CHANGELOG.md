@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 
-## Unreleased
+## 0.4.0 - 2016-06-13
 
 ### Changed
 - Use PMRF v0.4.0, much faster and versatile.
