@@ -15,11 +15,10 @@ import tempfile
 import os.path
 import optparse
 import ConfigParser
+import subprocess
+import shlex
 
 from edge import build_edge
-from mrf import run_pmrf
-from score import calc_pos_score
-from score import calc_pair_score
 from util import message
 from util import write_file
 
@@ -41,22 +40,34 @@ def load_config():
 
 def smrf(afa_file, pdb_file, options, pmrf_path):
     edge_file, mrf_file = options.edge_file, options.mrf_file
+    pmrf_exec = '%s/pmrf'%pmrf_path
+    if not os.path.exists(pmrf_exec):
+        print 'Cannot find the PMRF executable in the directory %s.'%(pmrf_path)
+        sys.exit(1)
 
+    ## Determine graph structure
     edge_list = build_edge(afa_file, pdb_file)
     write_file('\n'.join(['%s\t%s'%(i, j) for i, j in edge_list]), edge_file)
     message('MRF edge is determined.')
 
-    run_pmrf(afa_file, edge_file, mrf_file, pmrf_path)
+    ## Build MRF model
+    cmd = '%s build %s --edge %s -o %s'%(pmrf_exec, afa_file, edge_file, mrf_file)
+    subprocess.check_call(cmd.split())
     message('MRF model is parameterized.')
 
-    pos_score = calc_pos_score(mrf_file, afa_file)
-    write_file('\n'.join(['%d\t%f'%(idx, val) for idx, val in pos_score]), options.score_file1)
-    message('Positional coevolution scores are written in %s.'%(options.score_file1))
+    ## Estimate positional coevolution
+    cmd = '%s stat %s --mode pos'%(pmrf_exec, mrf_file)
+    fp = sys.stdout if options.score_file1 == "stdout" else open(options.score_file1, 'w')
+    p = subprocess.Popen(shlex.split(cmd), stdout=fp)
+    p.wait()
+    message('Positional coevolution scores are estimated.')
 
+    ## Estimate pairwise coevolution
     if options.score_file2:
-        pair_score = calc_pair_score(mrf_file)
-        write_file('\n'.join(['%d\t%d\t%f'%(x.i, x.j, x.score) for x in pair_score]), options.score_file2)
-        message('Pairwise coevolution scores are written in %s.'%(options.score_file2))
+        cmd = '%s stat %s --mode pair'%(pmrf_exec, mrf_file)
+        p = subprocess.Popen(shlex.split(cmd), stdout=open(options.score_file2, 'w'))
+        p.wait()
+        message('Pairwise coevolution scores are estimated.')
 
 def parse_options():
     parser = optparse.OptionParser(usage = "%prog <msa_file> <pdb_file> [options]",
