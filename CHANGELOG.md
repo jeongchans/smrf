@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## 0.4.0 - 2016-06-13
+
+### Changed
+- Use PMRF v0.4.0, much faster and versatile.
+- MRF file is written in PMRF v0.4.0 compatible format.
+
+### Compatibility Warning
+- Not support PMRF v0.2.x.
+
+
 ## 0.2.2 - 2016-06-02
 
 ### Added
@@ -37,3 +47,4 @@ All notable changes to this project will be documented in this file.
 - Build the structure-based Markov random field.
 - Calculate the pairwise coevolution scores.
 - Calculate the positional coevolution scores.
+^

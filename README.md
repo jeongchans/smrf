@@ -10,9 +10,9 @@ The standard Python package and the following packages are required.
 - [Biopython]
 - [Numpy]
 
-The PMRF software is required.
+The PMRF software (currently, compatible with v0.4.x) is required.
 
-- [PMRF] (Compatible with v0.2)
+- [PMRF]
 
 ### Download
 Download the the latest release from the [SMRF repository].
